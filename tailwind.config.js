@@ -68,19 +68,35 @@ module.exports = {
   plugins: [
     plugin(({ addUtilities, e, theme }) => {
       const _ = require('lodash');
+      function colorContrast(hex) {
+        let hexa = '';
+        if (hex.indexOf('#') === 0) {
+          hexa = hex.slice(1);
+        }
+        if (hexa.length === 3) {
+          hexa = hexa[0] + hexa[0] + hexa[1] + hexa[1] + hexa[2] + hexa[2];
+        }
+        if (hexa.length !== 6) {
+          return '';
+        }
+        const r = parseInt(hexa.slice(0, 2), 16);
+        const g = parseInt(hexa.slice(2, 4), 16);
+        const b = parseInt(hexa.slice(4, 6), 16);
+        return r * 0.299 + g * 0.587 + b * 0.114 > 160 ? '#000000 !important' : '#FFFFFF !important';
+      }
 
       const colorBgContrast = {};
       _.each(theme('colors'), (color, key) => {
         if (typeof color === 'string') {
           colorBgContrast[`.${e(`bg-text-${key}`)}`] = {
             'background-color': `${color}`,
-            color: 'white', // callculate color
+            color: colorContrast(color), // callculate color
           };
         } else {
-          Object.keys(color).forEach((pepe) => {
-            colorBgContrast[`.${e(`bg-text-${key}-${pepe}`)}`] = {
-              'background-color': `${color[pepe]}`,
-              color: 'white', // callculate color
+          Object.keys(color).forEach((sub) => {
+            colorBgContrast[`.${e(`bg-text-${key}-${sub}`)}`] = {
+              'background-color': `${color[sub]}`,
+              color: colorContrast(color[sub]), // callculate color
             };
           });
         }

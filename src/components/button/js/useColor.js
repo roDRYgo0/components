@@ -47,7 +47,7 @@ export default function useSize(color, isLoading, disabled, light, outlined) {
         if (outlined.value) {
           return `border-${color.value}-600 text-${color.value}-600 bg-transparent`;
         }
-        return `${focus.value} ${hover.value} ${active.value} border-transparent text-white bg-${color.value}-600`;
+        return `${focus.value} ${hover.value} ${active.value} border-transparent text-white bg-text-${color.value}-600`;
     }
   });
 
