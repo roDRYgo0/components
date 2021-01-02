@@ -2,8 +2,9 @@
   <span
     class="inline-flex rounded-md shadow-sm"
   >
-    <button
-      :type="type"
+    <component
+      :is="computedTag"
+      v-bind="$attrs"
       class="inline-flex justify-center items-center border border-transparent font-medium focus:outline-none transition ease-in-out duration-150 w-full"
       :class="[
         sizeClass,
@@ -13,37 +14,45 @@
         disabled || isLoading ? 'cursor-default' : ''
       ]"
       :disabled="disabled"
-      @click="handleClick($event)"
+      :type="type"
     >
       <div
         v-if="iconPosition === 'left' && !isLoading"
-        class="-ml-0.5 mr-2"
+        :class="{
+          '-ml-0.5 mr-2': $slots.default
+        }"
       >
         <slot name="icon" />
       </div>
       <progress-circular
-        v-if="isLoading"
-        class="mr-2"
+        v-if="iconPosition === 'left' &&isLoading"
+        class="-ml-0.5 mr-2"
       />
       <slot />
       <div
-        v-if="iconPosition === 'right'"
-        class="ml-2 -mr-0.5"
+        v-if="iconPosition === 'right' && !isLoading"
+        :class="{
+          'ml-2 -mr-0.5': $slots.default
+        }"
       >
         <slot name="icon" />
       </div>
-    </button>
+      <progress-circular
+        v-if="iconPosition === 'right' &&isLoading"
+        class="ml-2 -mr-0.5"
+      />
+    </component>
   </span>
 </template>
 
 <script>
-import { toRefs } from 'vue';
+import { computed, toRefs } from 'vue';
 import useSize from './js/useSize';
 import useColor from './js/useColor';
 
 export default {
   name: 'TButton',
-  emits: ['click'],
+  inheritAttrs: false,
 
   props: {
     size: {
@@ -82,26 +91,32 @@ export default {
       type: String,
       default: 'button',
     },
+    tag: {
+      type: String,
+      default: 'button',
+    },
   },
 
   setup(props) {
     const {
-      size, color, isLoading, disabled, light, outlined,
+      size, color, isLoading, disabled, light, outlined, tag,
     } = toRefs(props);
 
     const { sizeClass } = useSize(size);
     const { colorClass } = useColor(color, isLoading, disabled, light, outlined);
 
+    const computedTag = computed(() => {
+      if (disabled.value !== false) {
+        return 'button';
+      }
+      return tag.value;
+    });
+
     return {
       sizeClass,
       colorClass,
+      computedTag,
     };
-  },
-
-  methods: {
-    handleClick(e) {
-      this.$emit('click', e);
-    },
   },
 };
 // export default {

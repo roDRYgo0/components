@@ -16,7 +16,7 @@ export default function useSize(color, isLoading, disabled, light, outlined) {
         if (light.value) {
           return `hover:bg-${color.value}-50`;
         }
-        return `hover:bg-${color.value}-500`;
+        return `hover:bg-text-${color.value}-500`;
     }
   });
   const active = computed(() => {
@@ -30,7 +30,7 @@ export default function useSize(color, isLoading, disabled, light, outlined) {
         if (light.value) {
           return `active:bg-${color.value}-200`;
         }
-        return `active:bg-${color.value}-700`;
+        return `active:bg-text-${color.value}-700`;
     }
   });
 
@@ -45,9 +45,9 @@ export default function useSize(color, isLoading, disabled, light, outlined) {
           return `${focus.value} ${hover.value} ${active.value} border-transparent text-${color.value}-800 bg-${color.value}-100`;
         }
         if (outlined.value) {
-          return `border-${color.value}-600 text-${color.value}-600 bg-transparent`;
+          return `${focus.value} ${hover.value} ${active.value} border-${color.value}-600 text-${color.value}-700 bg-transparent`;
         }
-        return `${focus.value} ${hover.value} ${active.value} border-transparent text-white bg-text-${color.value}-600`;
+        return `${focus.value} ${hover.value} ${active.value} border-transparent bg-text-${color.value}-600`;
     }
   });
 
