@@ -1,3 +1,7 @@
+/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable global-require */
+const plugin = require('tailwindcss/plugin');
+
 module.exports = {
   purge: [],
   darkMode: false, // or 'media' or 'class'
@@ -61,5 +65,27 @@ module.exports = {
       textColor: ['responsive', 'hover', 'focus', 'active'],
     },
   },
-  plugins: [],
+  plugins: [
+    plugin(({ addUtilities, e, theme }) => {
+      const _ = require('lodash');
+
+      const colorBgContrast = {};
+      _.each(theme('colors'), (color, key) => {
+        if (typeof color === 'string') {
+          colorBgContrast[`.${e(`bg-text-${key}`)}`] = {
+            'background-color': `${color}`,
+            color: 'white', // callculate color
+          };
+        } else {
+          Object.keys(color).forEach((pepe) => {
+            colorBgContrast[`.${e(`bg-text-${key}-${pepe}`)}`] = {
+              'background-color': `${color[pepe]}`,
+              color: 'white', // callculate color
+            };
+          });
+        }
+      });
+      addUtilities(colorBgContrast, ['hover', 'focus']);
+    }),
+  ],
 };
