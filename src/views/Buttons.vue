@@ -278,14 +278,7 @@
 </template>
 <script>
 export default {
-  data: () => ({
-    coco: 1,
-  }),
-  methods: {
-    showCoco() {
-      console.log(this.coco);
-    },
-  },
+
 };
 </script>
 

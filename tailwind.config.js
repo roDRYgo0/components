@@ -66,6 +66,8 @@ module.exports = {
     },
   },
   plugins: [
+    require('@tailwindcss/forms'),
+
     plugin(({ addUtilities, e, theme }) => {
       const _ = require('lodash');
       function colorContrast(hex) {

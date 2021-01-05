@@ -1,6 +1,6 @@
 import { computed } from 'vue';
 
-export default function useSize(color, isLoading, disabled, light, outlined) {
+export default function useColor(color, isLoading, disabled, light, outlined) {
   const focus = computed(() => {
     if (isLoading.value || disabled.value) return '';
     return `focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-${color.value}-500`;

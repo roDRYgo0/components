@@ -1,12 +1,18 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Buttons from '../views/Buttons.vue';
+import Inputs from '../views/Inputs.vue';
 
 const routes = [
   {
     path: '/buttons',
-    alias: '/',
     name: 'Buttons',
     component: Buttons,
+  },
+  {
+    path: '/inputs',
+    alias: '/',
+    name: 'Inputs',
+    component: Inputs,
   },
 ];
 
