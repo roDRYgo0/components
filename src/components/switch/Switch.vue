@@ -1,11 +1,14 @@
 <template>
   <div
-    @click="status = !status"
-    class="w-14 h-8 group rounded-full border  flex items-center bg-gray-50 relative"
+    @click="toggle"
+    class="w-14 h-8 group rounded-full border flex items-center relative"
+    :class="[
+      colorClass,
+    ]"
   >
     <div
       :class="[
-        colorClass
+        colorClassDot,
         ,{
           'mx-1': !status,
           'translate-x-full mx-0.5': status
@@ -15,13 +18,21 @@
   </div>
 </template>
 <script>
-import { ref, toRef, watch } from 'vue';
+import {
+  ref, toRefs, watch,
+} from 'vue';
 import useColor from './js/useColor';
+import useColorDot from './js/useColorDot';
 
 export default {
   name: 'TSwitch',
+  inheritAttrs: false,
   props: {
     modelValue: {
+      type: Boolean,
+      default: false,
+    },
+    disabled: {
       type: Boolean,
       default: false,
     },
@@ -29,21 +40,32 @@ export default {
       type: String,
       default: 'primary',
     },
+    passiveColor: {
+      type: String,
+      default: 'secondary',
+    },
   },
   emits: ['update:modelValue'],
   setup(props, { emit }) {
     // PROPS
-    const { color } = toRef(props);
+    const { color, passiveColor, disabled } = toRefs(props);
     // Value internal
-    const status = ref(false);
+    const status = ref(props.modelValue);
 
     watch(status, (value) => {
       emit('update:modelValue', value);
     });
-    const colorClass = useColor(color);
+    const { colorClass } = useColor(status, color, passiveColor, disabled);
+    const { colorClassDot } = useColorDot(status, color, passiveColor, disabled);
+
+    const toggle = () => {
+      if (!disabled.value) { status.value = !status.value; }
+    };
     return {
+      toggle,
       status,
       colorClass,
+      colorClassDot,
     };
   },
 };
