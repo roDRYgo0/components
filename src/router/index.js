@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Buttons from '../views/Buttons.vue';
 import Inputs from '../views/Inputs.vue';
+import Switchs from '../views/Switchs.vue';
 
 const routes = [
   {
@@ -13,6 +14,12 @@ const routes = [
     alias: '/',
     name: 'Inputs',
     component: Inputs,
+  },
+  {
+    path: '/switchs',
+    alias: '/',
+    name: 'Switchs',
+    component: Switchs,
   },
 ];
 
