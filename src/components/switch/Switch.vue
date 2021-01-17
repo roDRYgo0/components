@@ -22,7 +22,6 @@ import {
   ref, toRefs, watch,
 } from 'vue';
 import useColor from './js/useColor';
-import useColorDot from './js/useColorDot';
 
 export default {
   name: 'TSwitch',
@@ -44,19 +43,24 @@ export default {
       type: String,
       default: 'secondary',
     },
+    light: {
+      type: Boolean,
+      default: false,
+    },
   },
   emits: ['update:modelValue'],
   setup(props, { emit }) {
     // PROPS
-    const { color, passiveColor, disabled } = toRefs(props);
+    const {
+      color, passiveColor, disabled, light,
+    } = toRefs(props);
     // Value internal
     const status = ref(props.modelValue);
 
     watch(status, (value) => {
       emit('update:modelValue', value);
     });
-    const { colorClass } = useColor(status, color, passiveColor, disabled);
-    const { colorClassDot } = useColorDot(status, color, passiveColor, disabled);
+    const { colorClass, colorClassDot } = useColor(status, color, passiveColor, disabled, light);
 
     const toggle = () => {
       if (!disabled.value) { status.value = !status.value; }

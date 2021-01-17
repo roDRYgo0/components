@@ -20,6 +20,7 @@
           :color="data.color"
           :passive-color="data.passiveColor"
           :disabled="data.disabled"
+          :light="data.light"
         />
         <p class="capitalize w-full text-center">
           {{ data.title || data.color || data.passiveColor }}
@@ -113,6 +114,44 @@ export default {
     });
     this.collection[2].data.push({
       passiveColor: 'warning',
+    });
+    // Color Lights
+    this.collection.push({
+      name: 'Lights Colors',
+      data: [],
+    });
+    this.collection[3].data.push({
+      color: 'primary',
+      light: true,
+      state: true,
+    });
+    this.collection[3].data.push({
+      color: 'primary',
+      light: true,
+      state: true,
+      disabled: true,
+    });
+    this.collection[3].data.push({
+      color: 'success',
+      light: true,
+      state: true,
+    });
+    this.collection[3].data.push({
+      color: 'success',
+      light: true,
+      state: true,
+      disabled: true,
+    });
+    this.collection[3].data.push({
+      color: 'warning',
+      light: true,
+      state: true,
+    });
+    this.collection[3].data.push({
+      color: 'warning',
+      light: true,
+      state: true,
+      disabled: true,
     });
   },
 };
