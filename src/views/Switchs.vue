@@ -18,9 +18,10 @@
         <t-switch
           v-model="data.state"
           :color="data.color"
-          :passive-color="data.passiveColor"
+          :color-passive="data.passiveColor"
           :disabled="data.disabled"
           :light="data.light"
+          :light-passive="data.lightPassive"
         />
         <p class="capitalize w-full text-center">
           {{ data.title || data.color || data.passiveColor }}
@@ -78,6 +79,7 @@ export default {
     });
     this.collection[1].data.push({
       color: 'secondary',
+      passiveColor: 'danger',
       state: true,
     });
     this.collection[1].data.push({
@@ -92,66 +94,124 @@ export default {
       color: 'warning',
       state: true,
     });
-    // Color Passive
-    this.collection.push({
-      name: 'Passive Colors',
-      data: [],
-    });
-    this.collection[2].data.push({
-      title: 'default',
-    });
-    this.collection[2].data.push({
-      passiveColor: 'primary',
-    });
-    this.collection[2].data.push({
-      passiveColor: 'secondary',
-    });
-    this.collection[2].data.push({
-      passiveColor: 'success',
-    });
-    this.collection[2].data.push({
-      passiveColor: 'danger',
-    });
-    this.collection[2].data.push({
-      passiveColor: 'warning',
-    });
     // Color Lights
     this.collection.push({
       name: 'Lights Colors',
       data: [],
     });
-    this.collection[3].data.push({
+    this.collection[2].data.push({
       color: 'primary',
       light: true,
       state: true,
     });
-    this.collection[3].data.push({
+    this.collection[2].data.push({
+      title: 'primary - disable',
       color: 'primary',
       light: true,
       state: true,
       disabled: true,
     });
-    this.collection[3].data.push({
+    this.collection[2].data.push({
+      color: 'secondary',
+      light: true,
+      state: true,
+    });
+    this.collection[2].data.push({
+      title: 'secondary - disable',
+      color: 'secondary',
+      light: true,
+      state: true,
+      disabled: true,
+    });
+    this.collection[2].data.push({
       color: 'success',
       light: true,
       state: true,
     });
-    this.collection[3].data.push({
+    this.collection[2].data.push({
+      title: 'success - disable',
       color: 'success',
       light: true,
       state: true,
       disabled: true,
     });
-    this.collection[3].data.push({
+    this.collection[2].data.push({
       color: 'warning',
       light: true,
       state: true,
     });
-    this.collection[3].data.push({
+    this.collection[2].data.push({
+      title: 'warning - disable',
       color: 'warning',
       light: true,
       state: true,
       disabled: true,
+    });
+    this.collection[2].data.push({
+      color: 'danger',
+      light: true,
+      state: true,
+    });
+    this.collection[2].data.push({
+      title: 'danger - disable',
+      color: 'danger',
+      light: true,
+      state: true,
+      disabled: true,
+    });
+    // Passive
+    this.collection.push({
+      name: 'Passive Colors',
+      data: [],
+    });
+    this.collection[3].data.push({
+      title: 'default',
+    });
+    this.collection[3].data.push({
+      title: 'primary',
+      color: 'secondary',
+      passiveColor: 'primary',
+    });
+    this.collection[3].data.push({
+      passiveColor: 'secondary',
+    });
+    this.collection[3].data.push({
+      passiveColor: 'success',
+    });
+    this.collection[3].data.push({
+      passiveColor: 'danger',
+    });
+    this.collection[3].data.push({
+      passiveColor: 'warning',
+    });
+    // Passive Lights
+    this.collection.push({
+      name: 'Lights Passive',
+      data: [],
+    });
+    this.collection[4].data.push({
+      title: 'Default',
+      lightPassive: true,
+    });
+    this.collection[4].data.push({
+      passiveColor: 'primary',
+      lightPassive: true,
+    });
+    this.collection[4].data.push({
+      passiveColor: 'secondary',
+      lightPassive: true,
+    });
+    this.collection[4].data.push({
+      passiveColor: 'success',
+      lightPassive: true,
+    });
+    this.collection[4].data.push({
+      passiveColor: 'warning',
+      lightPassive: true,
+    });
+    this.collection[4].data.push({
+      passiveColor: 'danger',
+      lightPassive: true,
     });
   },
 };

@@ -39,9 +39,13 @@ export default {
       type: String,
       default: 'primary',
     },
-    passiveColor: {
+    colorPassive: {
       type: String,
       default: 'secondary',
+    },
+    lightPassive: {
+      type: Boolean,
+      default: false,
     },
     light: {
       type: Boolean,
@@ -52,7 +56,7 @@ export default {
   setup(props, { emit }) {
     // PROPS
     const {
-      color, passiveColor, disabled, light,
+      color, colorPassive, disabled, light, lightPassive,
     } = toRefs(props);
     // Value internal
     const status = ref(props.modelValue);
@@ -60,7 +64,7 @@ export default {
     watch(status, (value) => {
       emit('update:modelValue', value);
     });
-    const { colorClass, colorClassDot } = useColor(status, color, passiveColor, disabled, light);
+    const { colorClass, colorClassDot } = useColor(status, color, colorPassive, disabled, light, lightPassive);
 
     const toggle = () => {
       if (!disabled.value) { status.value = !status.value; }

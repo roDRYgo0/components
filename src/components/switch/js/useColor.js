@@ -1,10 +1,13 @@
 import { computed } from 'vue';
 
-export default function useColor(status, color, passiveColor, disabled, light) {
+export default function useColor(status, color, passiveColor, disabled, light, lightPassive) {
   // Switch
   const backgroundClass = computed(() => {
     if (!status.value) {
-      return `bg-${passiveColor.value}-${disabled.value ? '50' : '200'}`;
+      if (lightPassive.value) {
+        return `bg-${passiveColor.value}-${disabled.value ? '100' : '200'}`;
+      }
+      return `bg-${passiveColor.value}-${disabled.value ? '400' : '500'}`;
     }
     if (light.value) {
       return `bg-${color.value}-${disabled.value ? '100' : '200'}`;
@@ -14,6 +17,9 @@ export default function useColor(status, color, passiveColor, disabled, light) {
 
   const borderClass = computed(() => {
     if (!status.value) {
+      if (lightPassive.value) {
+        return `border-${passiveColor.value}-${disabled.value ? '100' : '100'}`;
+      }
       return `border-${passiveColor.value}-${disabled.value ? '200' : '200'}`;
     }
     if (light.value) {
