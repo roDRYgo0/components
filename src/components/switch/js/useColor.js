@@ -5,14 +5,14 @@ export default function useColor(status, color, passiveColor, disabled, light, l
   const backgroundClass = computed(() => {
     if (!status.value) {
       if (lightPassive.value) {
-        return `bg-${passiveColor.value}-${disabled.value ? '100' : '200'}`;
+        return `${passiveColor.value}-${disabled.value ? '100' : '200'}`;
       }
-      return `bg-${passiveColor.value}-${disabled.value ? '400' : '500'}`;
+      return `${passiveColor.value}-${disabled.value ? '400' : '500'}`;
     }
     if (light.value) {
-      return `bg-${color.value}-${disabled.value ? '100' : '200'}`;
+      return `${color.value}-${disabled.value ? '100' : '200'}`;
     }
-    return `bg-${color.value}-${disabled.value ? '400' : '500'}`;
+    return `${color.value}-${disabled.value ? '400' : '500'}`;
   });
 
   const borderClass = computed(() => {
@@ -28,10 +28,10 @@ export default function useColor(status, color, passiveColor, disabled, light, l
     return `border-${color.value}-${disabled.value ? '400' : '700'}`;
   });
 
-  const colorClass = computed(() => `${backgroundClass.value}  ${borderClass.value}`);
+  const colorClass = computed(() => `bg-${backgroundClass.value}  ${borderClass.value}`);
 
   // Dot
-  const colorClassDot = computed(() => 'bg-white');
+  const colorClassDot = computed(() => `bg-white text-${backgroundClass.value}`);
 
   return {
     colorClass,
