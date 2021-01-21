@@ -1,6 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable global-require */
 const plugin = require('tailwindcss/plugin');
+const colors = require('tailwindcss/colors');
 
 module.exports = {
   purge: [],
@@ -20,6 +21,7 @@ module.exports = {
           800: '#152595',
           900: '#111e7a',
         },
+        secondary: colors.coolGray,
         success: {
           50: '#f5fcf8',
           100: '#ecf9f0',
